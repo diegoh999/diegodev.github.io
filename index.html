@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio-web</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+
+<style>
+  body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0b0c1e; color: #fff; scroll-behavior: smooth; }
+
+  /* Hacker neon title */
+  .hacker-title { font-family: 'Share Tech Mono', monospace; color: #0fffa0; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 5px #0fffa0, 0 0 20px #0fffa0; position: relative; display: inline-block; animation: flicker 1.5s infinite alternate; }
+  @keyframes flicker { 0%{opacity:1;text-shadow:0 0 5px #0fffa0,0 0 20px #0fffa0;} 25%{opacity:0.8;text-shadow:0 0 10px #00ffb0,0 0 30px #0fffa0;} 50%{opacity:1;text-shadow:0 0 5px #0fffa0,0 0 20px #00ffb0;} 75%{opacity:0.9;text-shadow:0 0 15px #0fffa0,0 0 25px #00ffb0;} 100%{opacity:1;text-shadow:0 0 5px #0fffa0,0 0 20px #0fffa0;} }
+
+  /* Hero */
+  header.hero { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; padding: 60px 20px; background: linear-gradient(135deg, #0b0c1e 0%, #1f1f3a 100%); overflow: hidden; }
+  header.hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,255,160,0.2) 0%, transparent 70%); animation: rotate 20s linear infinite; z-index: 0; }
+  @keyframes rotate { 0%{transform:rotate(0deg);}100%{transform:rotate(360deg);} }
+
+  .hero-text { max-width: 600px; position: relative; z-index: 1; text-align:center; }
+  .hero-text h1 { font-size: 2.5rem; color: #0fffa0; text-shadow: 0 0 5px #0fffa0,0 0 20px #0fffa0; animation: neon 1.5s ease-in-out infinite alternate; }
+  @keyframes neon { from{ text-shadow:0 0 10px #0fffa0,0 0 20px #0fffa0;} to{ text-shadow:0 0 20px #00ffb0,0 0 30px #00ffb0,0 0 40px #00ffb0;} }
+
+  header.hero img { max-width: 400px; width: 100%; border-radius: 15px; transition: transform 0.5s; z-index: 1; margin-top:20px; }
+  header.hero img:hover { transform: scale(1.05) rotate(3deg); }
+
+  .btn-lang { position: fixed; top: 20px; right: 20px; z-index: 2; background-color: transparent; border: 2px solid #fff; color: #fff; padding: 5px 10px; border-radius: 5px; font-weight: bold; transition: all 0.3s; }
+  .btn-lang:hover { background-color: #fff; color: #0b0c1e; }
+
+  .neon-button { padding: 14px 28px; font-size: 16px; color: #0fffa0; background: transparent; border: 2px solid #0fffa0; border-radius: 5px; cursor: pointer; font-family: 'Share Tech Mono', monospace; transition: 0.3s; text-transform: uppercase; animation: pulse 2s infinite; text-decoration:none; display:inline-block; margin-top:15px; }
+  .neon-button:hover { background-color: #0fffa0; color: #121212; box-shadow:0 0 10px #0fffa0,0 0 20px #0fffa0,0 0 40px #0fffa0; }
+  @keyframes pulse { 0%{box-shadow:0 0 5px #0fffa0;} 50%{box-shadow:0 0 20px #00ffb0,0 0 40px #0fffa0;} 100%{box-shadow:0 0 5px #0fffa0;} }
+
+  /* Projects */
+  section.projects { padding: 80px 20px; background: #1f1f3a; }
+  section.projects h2 { margin-bottom: 50px; }
+  .card { background: #2b2c4a; border: none; color: #fff; border-radius: 15px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; flex-shrink:0; }
+  .card:hover { transform: translateY(-10px) rotateX(5deg); box-shadow:0 0 20px #00b894,0 0 40px #00b894; }
+  .card-img-top { transition: transform 0.3s; }
+  .card:hover .card-img-top { transform: scale(1.05); }
+  .card a.btn { background-color: #00b894; border: none; transition: 0.3s; }
+  .card a.btn:hover { background-color: #009f75; }
+
+  /* Experience timeline */
+  #experience { padding: 80px 20px; background-color: #0b0c1e; }
+  .timeline { position: relative; padding-left: 30px; margin-top: 30px; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #00ffb0, #0fffa0); }
+  .timeline-item { position: relative; margin-bottom: 30px; }
+  .timeline-dot { position: absolute; left: -12px; top: 0; width: 24px; height: 24px; background: #0fffa0; border-radius: 50%; border: 3px solid #1f1f3a; transition: transform 0.3s, box-shadow 0.3s; }
+  .timeline-dot:hover { transform: scale(1.2); box-shadow:0 0 15px #0fffa0,0 0 25px #0fffa0; }
+  .timeline-content { padding-left: 50px; border-left: 2px solid #1f1f3a; }
+  .timeline-content h3 { font-weight: bold; }
+  .timeline-content p.text-muted { font-size: 0.9rem; color: #ccc; }
+
+  .fade-up { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease-out, transform 0.6s ease-out; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  /* Scrollable small projects */
+  .small-projects-container { display: flex; overflow-x: auto; gap:1rem; padding-bottom:10px; }
+  .small-projects-container::-webkit-scrollbar { height:8px; }
+  .small-projects-container::-webkit-scrollbar-thumb { background-color:#0fffa0; border-radius:4px; }
+  .small-projects-container article { flex: 0 0 auto; width: 250px; }
+
+  .small-projects-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem; /* hace espacio para la sombra */
+  position: relative; /* permite que los z-index funcionen */
+}
+
+.small-projects-container .card {
+  flex: 0 0 auto;
+  width: 250px;
+  z-index: 1; /* normal */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.small-projects-container .card:hover {
+  z-index: 10; /* sobresale por encima de los demás */
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 20px #00b894, 0 0 40px #00b894;
+}
+
+section.projects .row.big-project-row {
+  position: relative;   /* necesario para z-index */
+  overflow: visible;    /* que no corte la sombra */
+}
+
+section.projects .row.big-project-row .card {
+  z-index: 1;           /* normal */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+section.projects .row.big-project-row .card:hover {
+  z-index: 10;          /* sobresale sobre todo */
+}
+</style>
+</head>
+
+<body>
+<button id="btn-lang" class="btn-lang"><i class="bi bi-flag-fill"></i> EN</button>
+
+<header class="hero fade-up">
+  <div class="hero-text col-12 col-md-6">
+    <h1 id="hero-title" class="hacker-title">Welcome.</h1>
+    <h3 id="about_me" class="mt-3">About Me</h3>
+    <p id="hero-desc">
+      I’m Diego Medrano, a junior full-stack developer passionate about building clean, modern, and responsive web and desktop applications. I design intuitive interfaces and develop efficient backend systems to create dynamic and functional projects. With experience in various languages and technologies, I deliver complete, scalable solutions — from engaging front-end designs to solid databases. I enjoy transforming ideas into real applications that offer smooth and enjoyable user experiences across all platforms.
+    </p>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=diegomedrano.dev@gmail.com&su=Contacto%20desde%20la%20web&body=Hola%20Diego,%20te%20escribo%20porque..." 
+       class="neon-button text-decoration-none mb-5" target="_blank">Contact me!</a>
+  </div>
+  <div class="col-12 col-md-6 text-center">
+    <img class="img-fluid ms-2" src="img/Programmer.gif" alt="Diego programmer">
+  </div>
+</header>
+
+<section id="experience" class="container fade-up">
+  <h2 class="text-center mb-5 hacker-title" id="exp-title">Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3 class="h5" id="exp1-title">Programming Student (FACET)</h3>
+        <p class="text-white" id="exp1-date">2025 – Present</p>
+        <p id="exp1-desc">Developing personal and academic projects focused on software development, problem-solving, and full-stack applications.</p>
+        <p><strong>Technologies:</strong> Frontend (HTML, Bootstrap, JS) And backend (PHP, MySQL)</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3 class="h5" id="exp2-title">Hobby</h3>
+        <p class="text-white" id="exp2-date">2020 – 2024</p>
+        <p id="exp2-desc">Explored operating systems and cybersecurity, learning about Linux environments and scripting.</p>
+        <p><strong>Technologies:</strong> Linux, Bash, Shell, Git</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects container fade-up">
+  <h2 class="text-center hacker-title" id="projects-title">Projects</h2>
+
+ <!-- Proyecto grande -->
+<div class="row justify-content-start mb-5 big-project-row">
+  <article class="col-12 col-md-6 col-lg-5">
+    <div class="card shadow-sm">
+      <img src="img/proyecto2.png" class="card-img-top img-fluid" alt="Proyecto 1">
+      <div class="card-body">
+        <h5 class="card-title" id="proj2-title">Sales and Inventory Management System</h5>
+        <p class="card-text" id="proj2-desc">
+          A professional desktop web app built in PHP for a clothing store in Tucumán, Argentina.  
+          It streamlines sales, cash control, and inventory management through a clean interface and scalable backend.
+        </p>
+
+        <a href="img/macacha1.png" 
+           data-gallery="project2" 
+           class="btn btn-sm btn-primary lightbox-trigger"
+           data-glightbox="title: Sales and Inventory Management System; description:;">
+           View
+        </a>
+
+        <a href="img/macacha2.png" data-gallery="project2" class="lightbox-trigger d-none"></a>
+        <a href="img/macacha3.png" data-gallery="project2" class="lightbox-trigger d-none"></a>
+      </div>
+    </div>
+  </article>
+</div>
+
+  <!-- Small Projects scrollable -->
+  <h4 id="otros" class="text-center hacker-title" style="font-size:1.8rem; margin-bottom:24px;">Small Projects</h4>
+
+  <div class="small-projects-container mb-5 d-flex flex-row flex-nowrap overflow-auto gap-3">
+    <article class="card" style="min-width: 300px;">
+      <img src="img/proyecto1.png" class="card-img-top img-fluid" alt="Proyecto 2">
+      <div class="card-body">
+        <h5 class="card-title" id="proj1-title">Excuse Generator</h5>
+        <p class="card-text" id="proj1-desc">Generates random excuses in C.</p>
+        <a href="https://github.com/diegoh999/GeneradorDeExcusas" class="btn btn-sm btn-primary">View in GitHub</a>
+      </div>
+    </article>
+
+    <article class="card" style="min-width: 300px;">
+      <img src="img/php.png" class="card-img-top img-fluid" alt="Password Generator">
+      <div class="card-body">
+        <h5 class="card-title" id="proj3-title">Password Generator</h5>
+        <p class="card-text" id="proj3-desc">Generates strong and random passwords using PHP, with adjustable parameters.</p>
+        <a href="img/contraseñas.png" data-gallery="project3" class="btn btn-sm btn-primary lightbox-trigger">View</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer class="bg-dark text-white text-center py-4">
+  <p class="mb-2">&copy; 2025 Diego Medrano
+    <a href="https://github.com/diegoh999" target="_blank" class="text-white fs-4 ms-2"><i class="bi bi-github"></i></a>
+  </p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const lightbox = GLightbox({
+    selector: '.lightbox-trigger',
+    loop: true,
+    touchNavigation: true,
+    slideEffect: 'fade',
+    closeButton: true,
+    svg: {
+      close: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="white" d="M14.348 5.652a.5.5 0 0 0-.707 0L10 9.293 6.36 5.652a.5.5 0 1 0-.707.707L9.293 10l-3.64 3.64a.5.5 0 0 0 .707.707L10 10.707l3.64 3.64a.5.5 0 0 0 .707-.707L10.707 10l3.64-3.64a.5.5 0 0 0 0-.708z"/></svg>',
+      next: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="white" d="M7.05 4.05a.5.5 0 0 1 .7 0l5.2 5.2a.5.5 0 0 1 0 .7l-5.2 5.2a.5.5 0 1 1-.7-.7L11.79 10 7.05 5.35a.5.5 0 0 1 0-.7z"/></svg>',
+      prev: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="white" d="M12.95 4.05a.5.5 0 0 0-.7 0L7.05 9.25a.5.5 0 0 0 0 .7l5.2 5.2a.5.5 0 0 0 .7-.7L8.21 10l4.74-4.65a.5.5 0 0 0 0-.7z"/></svg>'
+    }
+  });
+</script>
+<script>
+  const btnLang = document.getElementById('btn-lang');
+  let lang = 'en';
+  btnLang.addEventListener('click', () => {
+    if(lang === 'en'){
+      lang = 'es';
+      btnLang.innerHTML = '<i class="bi bi-flag-fill"></i> ES';
+      document.getElementById('hero-title').textContent = 'Bienvenido.';
+      document.getElementById('about_me').textContent = 'Sobre mi:';
+      document.getElementById('hero-desc').textContent = 'Soy Diego Medrano, un desarrollador full-stack junior apasionado por crear aplicaciones web y de escritorio limpias, modernas y responsivas. Diseño interfaces intuitivas y desarrollo sistemas backend eficientes para construir proyectos dinámicos y funcionales. Con experiencia en varios lenguajes y tecnologías, entrego soluciones completas y escalables — desde diseños front-end atractivos hasta bases de datos sólidas. Disfruto transformar ideas en aplicaciones reales que ofrezcan experiencias de usuario fluidas y agradables en todas las plataformas.';
+      document.getElementById('projects-title').textContent = 'Proyectos';
+      document.getElementById('otros').textContent = 'Otros Proyectos';
+      document.getElementById('proj1-title').textContent = 'Generador de Excusas';
+      document.getElementById('proj1-desc').textContent = 'Genera excusas aleatorias en c.';
+      document.getElementById('proj2-title').textContent = 'Sistema de Ventas e Inventario';
+      document.getElementById('proj2-desc').textContent = 'Una aplicación web de escritorio profesional construida en PHP para una tienda de ropa en Tucumán, Argentina. Optimiza las ventas, el control de caja y la gestión de inventario a través de una interfaz limpia y un backend escalable impulsado por PHP, HTML, JSON y una integración opcional de MySQL.';
+      document.getElementById('proj3-title').textContent = 'Generador De Contraseñas';
+      document.getElementById('proj3-desc').textContent = 'Genera contraseñas fuertes y aleatorias usando PHP, con parámetros ajustables para longitud y tipos de caracteres.';
+      document.getElementById('exp-title').textContent = 'Experiencia';
+      document.getElementById('exp1-title').textContent = 'Estudiante de Programación (FACET)';
+      document.getElementById('exp1-date').textContent = '2025 – Actualidad';
+      document.getElementById('exp1-desc').textContent = 'Desarrollo de proyectos personales, aprendiendo buenas prácticas en desarrollo de software y resolución de problemas.';
+      document.getElementById('exp2-title').textContent = 'Hobby';
+      document.getElementById('exp2-date').textContent = '2020 – 2024';
+      document.getElementById('exp2-desc').textContent = 'Exploración de sistemas operativos y ciberseguridad, aprendiendo sobre entornos Linux y scripting.';
+    } else {
+      lang = 'en';
+      btnLang.innerHTML = '<i class="bi bi-flag-fill"></i> EN';
+      document.getElementById('hero-title').textContent = 'Welcome.';
+      document.getElementById('about_me').textContent = 'About me:';
+      document.getElementById('hero-desc').textContent = 'I’m Diego Medrano, a junior full-stack developer passionate about building clean, modern, and responsive web and desktop applications. I design intuitive interfaces and develop efficient backend systems to create dynamic and functional projects. With experience in various languages and technologies, I deliver complete, scalable solutions — from engaging front-end designs to solid databases. I enjoy transforming ideas into real applications that offer smooth and enjoyable user experiences across all platforms.';
+      document.getElementById('projects-title').textContent = 'Projects';
+      document.getElementById('otros').textContent = 'Other Projects';
+      document.getElementById('proj1-title').textContent = 'Excuse Generator';
+      document.getElementById('proj1-desc').textContent = 'Generates random excuses in c.';
+      document.getElementById('proj2-title').textContent = 'Sales and Inventory Management System';
+      document.getElementById('proj2-desc').textContent = 'A professional desktop web app built in PHP for a clothing store in Tucumán, Argentina. It streamlines sales, cash control, and inventory management through a clean interface and scalable backend powered by PHP, HTML, JSON, and optional MySQL integration.';
+      document.getElementById('proj3-title').textContent = 'Password Generator';
+      document.getElementById('proj3-desc').textContent = 'Generates strong and random passwords using PHP, with adjustable parameters for length and character types.';
+      document.getElementById('exp-title').textContent = 'Experience';
+      document.getElementById('exp1-title').textContent = 'Programming Student';
+      document.getElementById('exp1-date').textContent = '2025 – Present';
+      document.getElementById('exp1-desc').textContent = 'Developing personal and academic projects focused on software development, problem-solving, and full-stack applications.';
+      document.getElementById('exp2-title').textContent = 'Hobby';
+      document.getElementById('exp2-date').textContent = '2020 – 2024';
+      document.getElementById('exp2-desc').textContent = 'Explored operating systems and cybersecurity, learning about Linux environments and scripting.';
+    }
+  });
+
+  // Animaciones al hacer scroll
+  const faders = document.querySelectorAll('.fade-up');
+  const appearOptions = { threshold: 0.1 };
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+  faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
