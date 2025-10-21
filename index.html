@@ -113,8 +113,28 @@ section.projects .row.big-project-row .card:hover {
     <p id="hero-desc">
       I’m Diego Medrano, a junior full-stack developer passionate about building clean, modern, and responsive web and desktop applications. I design intuitive interfaces and develop efficient backend systems to create dynamic and functional projects. With experience in various languages and technologies, I deliver complete, scalable solutions — from engaging front-end designs to solid databases. I enjoy transforming ideas into real applications that offer smooth and enjoyable user experiences across all platforms.
     </p>
-    <a href="mailto:diegomedrano.dev@gmail.com?subject=Contacto%20desde%20la%20web&body=Hola%20Diego,%20te%20escribo%20porque..." 
-   class="neon-button text-decoration-none mb-5">Contact me!</a>
+    <a id="contact-link" href="#" class="neon-button text-decoration-none mb-5">Contact me!</a>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const link = document.getElementById("contact-link");
+    const ua = navigator.userAgent;
+
+    link.addEventListener("click", function(e) {
+      e.preventDefault(); // evita el comportamiento por defecto
+
+      if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
+        // Móviles: mailto
+        window.location.href = "mailto:diegomedrano.dev@gmail.com?subject=Contacto%20desde%20la%20web&body=Hola%20Diego,%20te%20escribo%20porque...";
+      } else {
+        // PC: Gmail web
+        const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=diegomedrano.dev@gmail.com&su=Contacto%20desde%20la%20web&body=Hola%20Diego,%20te%20escribo%20porque...";
+        window.open(gmailUrl, "_blank");
+      }
+    });
+  });
+</script>
+
   </div>
   <div class="col-12 col-md-6 text-center">
     <img class="img-fluid ms-2" src="img/Programmer.gif" alt="Diego programmer">
@@ -148,36 +168,71 @@ section.projects .row.big-project-row .card:hover {
 <section class="projects container fade-up">
   <h2 class="text-center hacker-title" id="projects-title">Projects</h2>
 
- <!-- Proyecto grande -->
+<!-- Proyectos grandes -->
 <div class="row justify-content-start mb-5 big-project-row">
-  <article class="col-12 col-md-6 col-lg-5">
+
+  <!-- Proyecto 1 -->
+  <article class="col-12 col-md-6 col-lg-5 mb-4 mb-md-0">
     <div class="card shadow-sm">
       <img src="img/proyecto2.png" class="card-img-top img-fluid" alt="Proyecto 1">
       <div class="card-body">
         <h5 class="card-title" id="proj2-title">Sales and Inventory Management System</h5>
         <p class="card-text" id="proj2-desc">
-          A professional desktop web app built in PHP for a clothing store in Tucumán, Argentina.  
-          It streamlines sales, cash control, and inventory management through a clean interface and scalable backend.
+          A professional and customized desktop web app built in PHP for a clothing store in Argentina.
+          It streamlines sales, cash control, money flow, and inventory management through a clean interface and scalable backend.
         </p>
-
-        <a href="img/macacha1.png" 
-           data-gallery="project2" 
+        <a href="img/macacha0.mp4"
            class="btn btn-sm btn-primary lightbox-trigger"
-           data-glightbox="title:1/3;">
+           data-gallery="project2"
+           data-glightbox="title: Video 1/3; type: video">
            View
         </a>
-
-        <a href="img/macacha2.png" data-gallery="project2" class="lightbox-trigger d-none"></a>
-        <a href="img/macacha3.png" data-gallery="project2" class="lightbox-trigger d-none"></a>
+        <a href="img/macacha1.png" data-gallery="project2" class="lightbox-trigger d-none">2/3</a>
+        <a href="img/macacha2.png" data-gallery="project2" class="lightbox-trigger d-none">3/3</a>
       </div>
     </div>
   </article>
+
+  <!-- Proyecto 2 -->
+  <article class="col-12 col-md-6 col-lg-5">
+    <div class="card shadow-sm">
+      <img src="img/traslator.png" class="card-img-top img-fluid" alt="Proyecto 2">
+      <div class="card-body">
+        <h5 class="card-title" id="proj5-title">Translator</h5>
+        <p class="card-text" id="proj5-desc">
+          🇬🇧 English:<br>
+          Web translator built with HTML, CSS, and JavaScript. Uses the Fetch API to get real-time translations and display them in a clean, modern interface.
+        </p>
+        <a href="img/traslator.mp4"
+           class="btn btn-sm btn-primary lightbox-trigger"
+           data-gallery="project5">
+           View
+        </a>
+      </div>
+    </div>
+  </article>
+
 </div>
 
   <!-- Small Projects scrollable -->
   <h4 id="otros" class="text-center hacker-title" style="font-size:1.8rem; margin-bottom:24px;">Small Projects</h4>
 
   <div class="small-projects-container mb-5 d-flex flex-row flex-nowrap overflow-auto gap-3">
+
+    <article class="card" style="min-width: 300px;">
+      <img src="img/celu.jpeg" class="card-img-top img-fluid" alt="Proyecto 2">
+      <div class="card-body">
+        <h5 class="card-title" id="proj0-title">Chat online</h5>
+        <p class="card-text" id="proj0-desc">Real-time chat app built with Node.js and WebSockets. Supports multi-user chat via local Wi-Fi or ngrok. Camera feature not working yet but could be added.</p>
+        <a href="img/prueba.mp4"
+   class="btn btn-sm btn-primary lightbox-trigger"
+   data-gallery="project4"
+   data-glightbox="title: Video 1/2; type: video">
+   View
+</a> <a href="img/celu.jpeg" data-gallery="project4" class="lightbox-trigger d-none">2/3</a>
+      </div>
+    </article>
+
     <article class="card" style="min-width: 300px;">
       <img src="img/proyecto1.png" class="card-img-top img-fluid" alt="Proyecto 2">
       <div class="card-body">
@@ -234,11 +289,14 @@ section.projects .row.big-project-row .card:hover {
       document.getElementById('hero-desc').textContent = 'Soy Diego Medrano, un desarrollador full-stack junior apasionado por crear aplicaciones web y de escritorio limpias, modernas y responsivas. Diseño interfaces intuitivas y desarrollo sistemas backend eficientes para construir proyectos dinámicos y funcionales. Con experiencia en varios lenguajes y tecnologías, entrego soluciones completas y escalables — desde diseños front-end atractivos hasta bases de datos sólidas. Disfruto transformar ideas en aplicaciones reales que ofrezcan experiencias de usuario fluidas y agradables en todas las plataformas.';
       document.getElementById('projects-title').textContent = 'Proyectos';
       document.getElementById('otros').textContent = 'Otros Proyectos';
+      document.getElementById('proj0-desc').textContent = 'Aplicación de chat en tiempo real construida con Node.js, Express y WebSockets. Soporta chat multiusuario a través de Wi-Fi local o ngrok. La función de cámara aún no funciona pero se podría añadir.';
       document.getElementById('proj1-title').textContent = 'Generador de Excusas';
       document.getElementById('proj1-desc').textContent = 'Genera excusas aleatorias en c.';
       document.getElementById('proj2-title').textContent = 'Sistema de Ventas e Inventario';
-      document.getElementById('proj2-desc').textContent = 'Una aplicación web de escritorio profesional construida en PHP para una tienda de ropa en Tucumán, Argentina. Optimiza las ventas, el control de caja y la gestión de inventario a través de una interfaz limpia y un backend escalable impulsado por PHP, HTML, JSON y una integración opcional de MySQL.';
+      document.getElementById('proj2-desc').textContent = 'Una aplicación web de escritorio profesional desarrollada en PHP para una tienda de ropa en Tucumán, Argentina. Es personalizada y optimiza las ventas, el control de caja, la gestión del inventario y el flujo de dinero mediante una interfaz limpia y un backend escalable.';
       document.getElementById('proj3-title').textContent = 'Generador De Contraseñas';
+      document.getElementById('proj5-title').textContent = 'Traductor';
+      document.getElementById('proj5-desc').textContent = '🇪🇸 Español: Traductor web creado con HTML, CSS y JavaScript. Utiliza la API Fetch para obtener traducciones en tiempo real y mostrarlas en una interfaz limpia y moderna.';
       document.getElementById('proj3-desc').textContent = 'Genera contraseñas fuertes y aleatorias usando PHP, con parámetros ajustables para longitud y tipos de caracteres.';
       document.getElementById('exp-title').textContent = 'Experiencia';
       document.getElementById('exp1-title').textContent = 'Estudiante de Programación (FACET)';
@@ -257,10 +315,13 @@ section.projects .row.big-project-row .card:hover {
       document.getElementById('otros').textContent = 'Other Projects';
       document.getElementById('proj1-title').textContent = 'Excuse Generator';
       document.getElementById('proj1-desc').textContent = 'Generates random excuses in c.';
+      document.getElementById('proj0-desc').textContent = 'Real-time chat app built with Node.js and WebSockets. Supports multi-user chat via local Wi-Fi or ngrok. Camera feature not working yet but could be added.';
       document.getElementById('proj2-title').textContent = 'Sales and Inventory Management System';
-      document.getElementById('proj2-desc').textContent = 'A professional desktop web app built in PHP for a clothing store in Tucumán, Argentina. It streamlines sales, cash control, and inventory management through a clean interface and scalable backend powered by PHP, HTML, JSON, and optional MySQL integration.';
+      document.getElementById('proj2-desc').textContent = 'A professional and customized desktop web app built in PHP for a clothing store in Tucumán, Argentina. It streamlines sales, cash control, money flow, and inventory management through a clean interface and scalable backend.';
       document.getElementById('proj3-title').textContent = 'Password Generator';
       document.getElementById('proj3-desc').textContent = 'Generates strong and random passwords using PHP, with adjustable parameters for length and character types.';
+      document.getElementById('proj5-title').textContent = 'Traslator';
+      document.getElementById('proj5-desc').textContent = '🇬🇧 English: Web translator built with HTML, CSS, and JavaScript. Uses the Fetch API to get real-time translations and display them in a clean, modern interface.';
       document.getElementById('exp-title').textContent = 'Experience';
       document.getElementById('exp1-title').textContent = 'Programming Student (FACET)';
       document.getElementById('exp1-date').textContent = '2025 – Present';
@@ -284,7 +345,3 @@ section.projects .row.big-project-row .card:hover {
   }, appearOptions);
   faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
-
-
-
-
