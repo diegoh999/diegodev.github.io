@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio-web</title>
+<title>Diego Medrano | Portfolio</title>
 <link rel="icon" type="image/png" href="img/icono.png">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -11,7 +11,49 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 
 <style>
-  body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0b0c1e; color: #fff; scroll-behavior: smooth; }
+  /* Ajuste para que el navbar no tape el contenido */
+  body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0b0c1e; color: #fff; scroll-behavior: smooth; padding-top: 80px; }
+
+  /* --- Navbar Style (Estilo Alex Chen) --- */
+  .navbar {
+      background-color: rgba(11, 12, 30, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 255, 160, 0.1);
+      padding: 15px 0;
+  }
+  .navbar-brand {
+      font-family: 'Share Tech Mono', monospace;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #fff !important;
+      text-shadow: 0 0 10px rgba(0, 255, 160, 0.5);
+  }
+  .nav-link {
+      color: #e0e0e0 !important;
+      font-weight: 600;
+      margin-left: 20px;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+  }
+  .nav-link:hover, .nav-link.active {
+      color: #0fffa0 !important;
+      text-shadow: 0 0 8px rgba(0, 255, 160, 0.6);
+  }
+  /* Botón de idioma en el navbar */
+  .btn-lang { 
+      background-color: transparent; 
+      border: 1px solid #0fffa0; 
+      color: #0fffa0; 
+      padding: 5px 15px; 
+      border-radius: 4px; 
+      font-weight: bold; 
+      transition: all 0.3s; 
+      margin-left: 15px; 
+      font-family: 'Share Tech Mono', monospace; 
+  }
+  .btn-lang:hover { background-color: #0fffa0; color: #0b0c1e; }
+
 
   /* Hacker neon title */
   .hacker-title { font-family: 'Share Tech Mono', monospace; color: #0fffa0; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 5px #0fffa0, 0 0 20px #0fffa0; position: relative; display: inline-block; animation: flicker 1.5s infinite alternate; }
@@ -28,9 +70,6 @@
 
   header.hero img { max-width: 400px; width: 100%; border-radius: 15px; transition: transform 0.5s; z-index: 1; margin-top:20px; }
   header.hero img:hover { transform: scale(1.05) rotate(3deg); }
-
-  .btn-lang { position: fixed; top: 20px; right: 20px; z-index: 2; background-color: transparent; border: 2px solid #fff; color: #fff; padding: 5px 10px; border-radius: 5px; font-weight: bold; transition: all 0.3s; }
-  .btn-lang:hover { background-color: #fff; color: #0b0c1e; }
 
   .neon-button { padding: 14px 28px; font-size: 16px; color: #0fffa0; background: transparent; border: 2px solid #0fffa0; border-radius: 5px; cursor: pointer; font-family: 'Share Tech Mono', monospace; transition: 0.3s; text-transform: uppercase; animation: pulse 2s infinite; text-decoration:none; display:inline-block; margin-top:15px; }
   .neon-button:hover { background-color: #0fffa0; color: #121212; box-shadow:0 0 10px #0fffa0,0 0 20px #0fffa0,0 0 40px #0fffa0; }
@@ -65,55 +104,46 @@
   .small-projects-container::-webkit-scrollbar { height:8px; }
   .small-projects-container::-webkit-scrollbar-thumb { background-color:#0fffa0; border-radius:4px; }
   .small-projects-container article { flex: 0 0 auto; width: 250px; }
+  
+  .small-projects-container { display: flex; overflow-x: auto; gap: 1rem; padding: 1rem; position: relative; }
+  .small-projects-container .card { flex: 0 0 auto; width: 250px; z-index: 1; transition: transform 0.3s, box-shadow 0.3s; }
+  .small-projects-container .card:hover { z-index: 10; transform: translateY(-5px) scale(1.05); box-shadow: 0 0 20px #00b894, 0 0 40px #00b894; }
 
-  .small-projects-container {
-  display: flex;
-  overflow-x: auto;
-  gap: 1rem;
-  padding: 1rem; /* hace espacio para la sombra */
-  position: relative; /* permite que los z-index funcionen */
-}
-
-.small-projects-container .card {
-  flex: 0 0 auto;
-  width: 250px;
-  z-index: 1; /* normal */
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.small-projects-container .card:hover {
-  z-index: 10; /* sobresale por encima de los demás */
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 0 20px #00b894, 0 0 40px #00b894;
-}
-
-section.projects .row.big-project-row {
-  position: relative;   /* necesario para z-index */
-  overflow: visible;    /* que no corte la sombra */
-}
-
-section.projects .row.big-project-row .card {
-  z-index: 1;           /* normal */
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-section.projects .row.big-project-row .card:hover {
-  z-index: 10;          /* sobresale sobre todo */
-}
+  section.projects .row.big-project-row { position: relative; overflow: visible; }
+  section.projects .row.big-project-row .card { z-index: 1; transition: transform 0.3s, box-shadow 0.3s; }
+  section.projects .row.big-project-row .card:hover { z-index: 10; }
 </style>
 </head>
 
-<body>
-<button id="btn-lang" class="btn-lang"><i class="bi bi-flag-fill"></i> EN</button>
+<body data-bs-spy="scroll" data-bs-target="#navbar-main" data-bs-offset="100">
 
-<header class="hero fade-up">
+<nav id="navbar-main" class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Diego Medrano</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="background-color: #0fffa0; border-radius: 3px;"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item"><a class="nav-link" href="#home" id="nav-home">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#experience" id="nav-exp">Experiencia</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects" id="nav-proj">Proyectos</a></li>
+                <li class="nav-item">
+                    <button id="btn-lang" class="btn-lang"><i class="bi bi-flag-fill"></i> EN</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header id="home" class="hero fade-up">
   <div class="hero-text col-12 col-md-6">
-    <h1 id="hero-title" class="hacker-title">Welcome.</h1>
-    <h3 id="about_me" class="mt-3">About Me</h3>
+    <h1 id="hero-title" class="hacker-title">Bienvenido.</h1>
+    <h3 id="about_me" class="mt-3">Sobre mí</h3>
     <p id="hero-desc">
-      I’m Diego Medrano, a junior full-stack developer passionate about building clean, modern, and responsive web and desktop applications. I design intuitive interfaces and develop efficient backend systems to create dynamic and functional projects. With experience in various languages and technologies, I deliver complete, scalable solutions — from engaging front-end designs to solid databases. I enjoy transforming ideas into real applications that offer smooth and enjoyable user experiences across all platforms.
+      Soy Diego Medrano, un desarrollador full-stack junior apasionado por crear aplicaciones web y de escritorio limpias, modernas y responsivas. Diseño interfaces intuitivas y desarrollo sistemas backend eficientes para construir proyectos dinámicos y funcionales. Con experiencia en varios lenguajes y tecnologías, entrego soluciones completas y escalables — desde diseños front-end atractivos hasta bases de datos sólidas. Disfruto transformar ideas en aplicaciones reales que ofrezcan experiencias de usuario fluidas y agradables en todas las plataformas.
     </p>
-    <a id="contact-link" href="#" class="neon-button text-decoration-none mb-5">Contact me!</a>
+    <a id="contact-link" href="#" class="neon-button text-decoration-none mb-5">Contáctame</a>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -121,13 +151,10 @@ section.projects .row.big-project-row .card:hover {
     const ua = navigator.userAgent;
 
     link.addEventListener("click", function(e) {
-      e.preventDefault(); // evita el comportamiento por defecto
-
+      e.preventDefault(); 
       if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
-        // Móviles: mailto
         window.location.href = "mailto:diegomedrano.dev@gmail.com?subject=Contacto%20desde%20la%20web&body=Hola%20Diego,%20te%20escribo%20porque...";
       } else {
-        // PC: Gmail web
         const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=diegomedrano.dev@gmail.com&su=Contacto%20desde%20la%20web&body=Hola%20Diego,%20te%20escribo%20porque...";
         window.open(gmailUrl, "_blank");
       }
@@ -141,51 +168,112 @@ section.projects .row.big-project-row .card:hover {
   </div>
 </header>
 
-<section id="experience" class="container fade-up">
-  <h2 class="text-center mb-5 hacker-title" id="exp-title">Experience</h2>
+<section id="experience" class="container fade-up" style="padding: 80px 20px;">
+  <h2 class="text-center mb-5 hacker-title" id="exp-title">Experiencia</h2>
   <div class="timeline">
+    
     <div class="timeline-item">
       <div class="timeline-dot"></div>
       <div class="timeline-content">
-        <h3 class="h5" id="exp1-title">Programming Student (FACET)</h3>
-        <p class="text-white" id="exp1-date">2025 – Present</p>
-        <p id="exp1-desc">Developing personal and academic projects focused on software development, problem-solving, and full-stack applications.</p>
-        <p><strong>Technologies:</strong> Frontend (HTML, Bootstrap, JS) And backend (PHP, MySQL)</p>
+        <h3 class="h5" id="exp1-title">Estudiante de Programación (FACET)</h3>
+        <p class="text-white" id="exp1-date">2025 – Actualidad</p>
+        <p id="exp1-desc">Desarrollo de proyectos personales y académicos, enfocados en buenas prácticas de software y resolución de problemas.</p>
+        <p><strong>Tecnologías:</strong> Frontend (HTML, Bootstrap, JS) y Backend (PHP, MySQL)</p>
       </div>
     </div>
+
     <div class="timeline-item">
       <div class="timeline-dot"></div>
       <div class="timeline-content">
-        <h3 class="h5" id="exp2-title">Hobby</h3>
-        <p class="text-white" id="exp2-date">2020 – 2024</p>
-        <p id="exp2-desc">Explored operating systems and cybersecurity, learning about Linux environments and scripting.</p>
-        <p><strong>Technologies:</strong> Linux, Bash, Shell, Git</p>
+        <h3 class="h5" id="exp2-title">Formación Autodidacta</h3>
+        <p class="text-white" id="exp2-date">2022 – 2024</p>
+        <p id="exp2-desc">Exploración profunda de sistemas operativos y ciberseguridad. Aprendizaje de gestión de entornos Linux, scripting en Bash y redes.</p>
+        <p><strong>Tecnologías:</strong> Linux, Bash, Shell, Git</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills" class="fade-up" style="padding: 80px 20px;">
+  <div class="container">
+    <h2 class="text-center hacker-title mb-5">Habilidades</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        
+        <div class="mb-4">
+          <div class="d-flex justify-content-between font-monospace mb-1">
+            <span><i class="bi bi-filetype-php text-success me-2"></i>PHP & SQL</span>
+            <span class="text-success">85%</span>
+          </div>
+          <div class="progress" style="height: 10px; background: #2b2c4a;">
+            <div class="progress-bar" style="width: 85%; background: linear-gradient(90deg, #00b894, #0fffa0);"></div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between font-monospace mb-1">
+            <span><i class="bi bi-filetype-js text-warning me-2"></i>JavaScript & Node.js</span>
+            <span class="text-warning">75%</span>
+          </div>
+          <div class="progress" style="height: 10px; background: #2b2c4a;">
+            <div class="progress-bar" style="width: 75%; background: linear-gradient(90deg, #ffc107, #ffdb58);"></div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between font-monospace mb-1">
+            <span><i class="bi bi-filetype-html text-primary me-2"></i>HTML5 & CSS3 (Bootstrap)</span>
+            <span class="text-primary">90%</span>
+          </div>
+          <div class="progress" style="height: 10px; background: #2b2c4a;">
+            <div class="progress-bar" style="width: 90%; background: linear-gradient(90deg, #0d6efd, #0dcaf0);"></div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between font-monospace mb-1">
+            <span><i class="bi bi-code-square text-info me-2"></i>Lenguaje C</span>
+            <span class="text-info">70%</span>
+          </div>
+          <div class="progress" style="height: 10px; background: #2b2c4a;">
+            <div class="progress-bar" style="width: 70%; background: linear-gradient(90deg, #0dcaf0, #6610f2);"></div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between font-monospace mb-1">
+            <span><i class="bi bi-terminal text-light me-2"></i>Linux / Bash / Git</span>
+            <span class="text-light">70%</span>
+          </div>
+          <div class="progress" style="height: 10px; background: #2b2c4a;">
+            <div class="progress-bar" style="width: 70%; background: linear-gradient(90deg, #6c757d, #adb5bd);"></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
 <section class="projects container fade-up">
-  <h2 class="text-center hacker-title" id="projects-title">Projects</h2>
+  <h2 class="text-center hacker-title" id="projects-title">Proyectos</h2>
 
-<!-- Proyectos grandes -->
 <div class="row justify-content-start mb-5 big-project-row">
 
-  <!-- Proyecto 1 -->
   <article class="col-12 col-md-6 col-lg-5 mb-4 mb-md-0">
     <div class="card shadow-sm">
       <img src="img/proyecto2.png" class="card-img-top img-fluid" alt="Proyecto 1">
       <div class="card-body">
-        <h5 class="card-title" id="proj2-title">Sales and Inventory Management System</h5>
+        <h5 class="card-title" id="proj2-title">Sistema de Ventas y Stock</h5>
         <p class="card-text" id="proj2-desc">
-          A professional and customized desktop web app built in PHP for a clothing store in Argentina.
-          It streamlines sales, cash control, money flow, and inventory management through a clean interface and scalable backend.
+          Aplicación web profesional en PHP para tienda de ropa. Optimiza ventas, caja y gestión de inventario con un backend escalable.
         </p>
         <a href="img/macacha0.mp4"
-           class="btn btn-sm btn-primary lightbox-trigger"
+           class="btn btn-sm btn-primary lightbox-trigger btn-watch"
            data-gallery="project2"
            data-glightbox="title: Video 1/3; type: video">
-           View
+           Ver Demo
         </a>
         <a href="img/macacha1.png" data-gallery="project2" class="lightbox-trigger d-none">2/3</a>
         <a href="img/macacha2.png" data-gallery="project2" class="lightbox-trigger d-none">3/3</a>
@@ -193,20 +281,19 @@ section.projects .row.big-project-row .card:hover {
     </div>
   </article>
 
-  <!-- Proyecto 2 -->
   <article class="col-12 col-md-6 col-lg-5">
     <div class="card shadow-sm">
       <img src="img/traslator.png" class="card-img-top img-fluid" alt="Proyecto 2">
       <div class="card-body">
-        <h5 class="card-title" id="proj5-title">Translator</h5>
+        <h5 class="card-title" id="proj5-title">Traductor Web</h5>
         <p class="card-text" id="proj5-desc">
-          🇬🇧 English:<br>
-          Web translator built with HTML, CSS, and JavaScript. Uses the Fetch API to get real-time translations and display them in a clean, modern interface.
+          🇪🇸 Español:<br>
+          Traductor web creado con HTML, CSS y JavaScript. Utiliza la API Fetch para obtener traducciones en tiempo real y mostrarlas en una interfaz moderna.
         </p>
         <a href="img/traslator.mp4"
-           class="btn btn-sm btn-primary lightbox-trigger"
+           class="btn btn-sm btn-primary lightbox-trigger btn-watch"
            data-gallery="project5">
-           View
+           Ver Demo
         </a>
       </div>
     </div>
@@ -214,40 +301,39 @@ section.projects .row.big-project-row .card:hover {
 
 </div>
 
-  <!-- Small Projects scrollable -->
-  <h4 id="otros" class="text-center hacker-title" style="font-size:1.8rem; margin-bottom:24px;">Small Projects</h4>
+  <h4 id="otros" class="text-center hacker-title" style="font-size:1.8rem; margin-bottom:24px;">Más Proyectos</h4>
 
   <div class="small-projects-container mb-5 d-flex flex-row flex-nowrap overflow-auto gap-3">
 
     <article class="card" style="min-width: 300px;">
       <img src="img/celu.jpeg" class="card-img-top img-fluid" alt="Proyecto 2">
       <div class="card-body">
-        <h5 class="card-title" id="proj0-title">Chat online</h5>
-        <p class="card-text" id="proj0-desc">Real-time chat app built with Node.js and WebSockets. Supports multi-user chat via local Wi-Fi or ngrok. Camera feature not working yet but could be added.</p>
+        <h5 class="card-title" id="proj0-title">Chat en Tiempo Real</h5>
+        <p class="card-text" id="proj0-desc">App con Node.js y WebSockets. Soporta mensajería multiusuario vía Wi-Fi local.</p>
         <a href="img/prueba.mp4"
-   class="btn btn-sm btn-primary lightbox-trigger"
-   data-gallery="project4"
-   data-glightbox="title: Video 1/2; type: video">
-   View
-</a> <a href="img/celu.jpeg" data-gallery="project4" class="lightbox-trigger d-none">2/3</a>
+           class="btn btn-sm btn-primary lightbox-trigger btn-watch"
+           data-gallery="project4"
+           data-glightbox="title: Video 1/2; type: video">
+           Ver Demo
+        </a> <a href="img/celu.jpeg" data-gallery="project4" class="lightbox-trigger d-none">2/3</a>
       </div>
     </article>
 
     <article class="card" style="min-width: 300px;">
       <img src="img/proyecto1.png" class="card-img-top img-fluid" alt="Proyecto 2">
       <div class="card-body">
-        <h5 class="card-title" id="proj1-title">Excuse Generator</h5>
-        <p class="card-text" id="proj1-desc">Generates random excuses in C.</p>
-        <a href="https://github.com/diegoh999/GeneradorDeExcusas" class="btn btn-sm btn-primary">View in GitHub</a>
+        <h5 class="card-title" id="proj1-title">Generador de Excusas</h5>
+        <p class="card-text" id="proj1-desc">Genera excusas aleatorias en C.</p>
+        <a href="https://github.com/diegoh999/GeneradorDeExcusas" class="btn btn-sm btn-primary btn-view">Ver en GitHub</a>
       </div>
     </article>
 
     <article class="card" style="min-width: 300px;">
       <img src="img/php.png" class="card-img-top img-fluid" alt="Password Generator">
       <div class="card-body">
-        <h5 class="card-title" id="proj3-title">Password Generator</h5>
-        <p class="card-text" id="proj3-desc">Generates strong and random passwords using PHP, with adjustable parameters.</p>
-        <a href="img/contraseñas.png" data-gallery="project3" class="btn btn-sm btn-primary lightbox-trigger">View</a>
+        <h5 class="card-title" id="proj3-title">Generador de Contraseñas</h5>
+        <p class="card-text" id="proj3-desc">Script PHP para generar contraseñas criptográficamente fuertes.</p>
+        <a href="img/contraseñas.png" data-gallery="project3" class="btn btn-sm btn-primary lightbox-trigger btn-view">Ver</a>
       </div>
     </article>
   </div>
@@ -259,7 +345,6 @@ section.projects .row.big-project-row .card:hover {
   </p>
 </footer>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -277,58 +362,103 @@ section.projects .row.big-project-row .card:hover {
     }
   });
 </script>
+
 <script>
   const btnLang = document.getElementById('btn-lang');
-  let lang = 'en';
+  let lang = 'es'; // COMIENZA EN ESPAÑOL
+  
   btnLang.addEventListener('click', () => {
-    if(lang === 'en'){
-      lang = 'es';
-      btnLang.innerHTML = '<i class="bi bi-flag-fill"></i> ES';
-      document.getElementById('hero-title').textContent = 'Bienvenido.';
-      document.getElementById('about_me').textContent = 'Sobre mi:';
-      document.getElementById('hero-desc').textContent = 'Soy Diego Medrano, un desarrollador full-stack junior apasionado por crear aplicaciones web y de escritorio limpias, modernas y responsivas. Diseño interfaces intuitivas y desarrollo sistemas backend eficientes para construir proyectos dinámicos y funcionales. Con experiencia en varios lenguajes y tecnologías, entrego soluciones completas y escalables — desde diseños front-end atractivos hasta bases de datos sólidas. Disfruto transformar ideas en aplicaciones reales que ofrezcan experiencias de usuario fluidas y agradables en todas las plataformas.';
-      document.getElementById('projects-title').textContent = 'Proyectos';
-      document.getElementById('otros').textContent = 'Otros Proyectos';
-      document.getElementById('proj0-desc').textContent = 'Aplicación de chat en tiempo real construida con Node.js, Express y WebSockets. Soporta chat multiusuario a través de Wi-Fi local o ngrok. La función de cámara aún no funciona pero se podría añadir.';
-      document.getElementById('proj1-title').textContent = 'Generador de Excusas';
-      document.getElementById('proj1-desc').textContent = 'Genera excusas aleatorias en c.';
-      document.getElementById('proj2-title').textContent = 'Sistema de Ventas e Inventario';
-      document.getElementById('proj2-desc').textContent = 'Una aplicación web de escritorio profesional desarrollada en PHP para una tienda de ropa en Tucumán, Argentina. Es personalizada y optimiza las ventas, el control de caja, la gestión del inventario y el flujo de dinero mediante una interfaz limpia y un backend escalable.';
-      document.getElementById('proj3-title').textContent = 'Generador De Contraseñas';
-      document.getElementById('proj5-title').textContent = 'Traductor';
-      document.getElementById('proj5-desc').textContent = '🇪🇸 Español: Traductor web creado con HTML, CSS y JavaScript. Utiliza la API Fetch para obtener traducciones en tiempo real y mostrarlas en una interfaz limpia y moderna.';
-      document.getElementById('proj3-desc').textContent = 'Genera contraseñas fuertes y aleatorias usando PHP, con parámetros ajustables para longitud y tipos de caracteres.';
-      document.getElementById('exp-title').textContent = 'Experiencia';
-      document.getElementById('exp1-title').textContent = 'Estudiante de Programación (FACET)';
-      document.getElementById('exp1-date').textContent = '2025 – Actualidad';
-      document.getElementById('exp1-desc').textContent = 'Desarrollo de proyectos personales, aprendiendo buenas prácticas en desarrollo de software y resolución de problemas.';
-      document.getElementById('exp2-title').textContent = 'Hobby';
-      document.getElementById('exp2-date').textContent = '2020 – 2024';
-      document.getElementById('exp2-desc').textContent = 'Exploración de sistemas operativos y ciberseguridad, aprendiendo sobre entornos Linux y scripting.';
-    } else {
+    if(lang === 'es'){
+      // CAMBIAR A INGLES
       lang = 'en';
-      btnLang.innerHTML = '<i class="bi bi-flag-fill"></i> EN';
+      btnLang.innerHTML = '<i class="bi bi-flag-fill"></i> ES'; // Muestra opción para volver a ES
+      
+      // Navbar
+      document.getElementById('nav-home').textContent = 'Home';
+      document.getElementById('nav-exp').textContent = 'Experience';
+      document.getElementById('nav-proj').textContent = 'Projects';
+
+      // Contenido
       document.getElementById('hero-title').textContent = 'Welcome.';
-      document.getElementById('about_me').textContent = 'About me:';
+      document.getElementById('about_me').textContent = 'About me';
       document.getElementById('hero-desc').textContent = 'I’m Diego Medrano, a junior full-stack developer passionate about building clean, modern, and responsive web and desktop applications. I design intuitive interfaces and develop efficient backend systems to create dynamic and functional projects. With experience in various languages and technologies, I deliver complete, scalable solutions — from engaging front-end designs to solid databases. I enjoy transforming ideas into real applications that offer smooth and enjoyable user experiences across all platforms.';
-      document.getElementById('projects-title').textContent = 'Projects';
-      document.getElementById('otros').textContent = 'Other Projects';
-      document.getElementById('proj1-title').textContent = 'Excuse Generator';
-      document.getElementById('proj1-desc').textContent = 'Generates random excuses in c.';
-      document.getElementById('proj0-desc').textContent = 'Real-time chat app built with Node.js and WebSockets. Supports multi-user chat via local Wi-Fi or ngrok. Camera feature not working yet but could be added.';
-      document.getElementById('proj2-title').textContent = 'Sales and Inventory Management System';
-      document.getElementById('proj2-desc').textContent = 'A professional and customized desktop web app built in PHP for a clothing store in Tucumán, Argentina. It streamlines sales, cash control, money flow, and inventory management through a clean interface and scalable backend.';
-      document.getElementById('proj3-title').textContent = 'Password Generator';
-      document.getElementById('proj3-desc').textContent = 'Generates strong and random passwords using PHP, with adjustable parameters for length and character types.';
-      document.getElementById('proj5-title').textContent = 'Traslator';
-      document.getElementById('proj5-desc').textContent = '🇬🇧 English: Web translator built with HTML, CSS, and JavaScript. Uses the Fetch API to get real-time translations and display them in a clean, modern interface.';
+      document.getElementById('contact-link').textContent = 'Contact me!';
+      
       document.getElementById('exp-title').textContent = 'Experience';
       document.getElementById('exp1-title').textContent = 'Programming Student (FACET)';
       document.getElementById('exp1-date').textContent = '2025 – Present';
       document.getElementById('exp1-desc').textContent = 'Developing personal and academic projects focused on software development, problem-solving, and full-stack applications.';
-      document.getElementById('exp2-title').textContent = 'Hobby';
+      document.getElementById('exp2-title').textContent = 'Self-taught Education';
       document.getElementById('exp2-date').textContent = '2020 – 2024';
       document.getElementById('exp2-desc').textContent = 'Explored operating systems and cybersecurity, learning about Linux environments and scripting.';
+
+      document.getElementById('projects-title').textContent = 'Projects';
+      document.getElementById('otros').textContent = 'Other Projects';
+
+      document.getElementById('proj2-title').textContent = 'Sales and Inventory Management System';
+      document.getElementById('proj2-desc').textContent = 'A professional and customized desktop web app built in PHP for a clothing store in Tucumán, Argentina. It streamlines sales, cash control, money flow, and inventory management through a clean interface and scalable backend.';
+      
+      document.getElementById('proj5-title').textContent = 'Translator';
+      document.getElementById('proj5-desc').textContent = '🇬🇧 English: Web translator built with HTML, CSS, and JavaScript. Uses the Fetch API to get real-time translations and display them in a clean, modern interface.';
+
+      document.getElementById('proj0-title').textContent = 'Online Chat';
+      document.getElementById('proj0-desc').textContent = 'Real-time chat app built with Node.js and WebSockets. Supports multi-user chat via local Wi-Fi or ngrok. Camera feature not working yet but could be added.';
+      
+      document.getElementById('proj1-title').textContent = 'Excuse Generator';
+      document.getElementById('proj1-desc').textContent = 'Generates random excuses in C.';
+      
+      document.getElementById('proj3-title').textContent = 'Password Generator';
+      document.getElementById('proj3-desc').textContent = 'Generates strong and random passwords using PHP, with adjustable parameters for length and character types.';
+
+      // Botones
+      document.querySelectorAll('.btn-watch').forEach(btn => btn.textContent = 'Watch Demo');
+      document.querySelectorAll('.btn-view').forEach(btn => btn.textContent = 'View');
+
+    } else {
+      // VOLVER A ESPAÑOL
+      lang = 'es';
+      btnLang.innerHTML = '<i class="bi bi-flag-fill"></i> EN'; // Muestra opción para ir a EN
+
+      // Navbar
+      document.getElementById('nav-home').textContent = 'Inicio';
+      document.getElementById('nav-exp').textContent = 'Experiencia';
+      document.getElementById('nav-proj').textContent = 'Proyectos';
+
+      // Contenido
+      document.getElementById('hero-title').textContent = 'Bienvenido.';
+      document.getElementById('about_me').textContent = 'Sobre mí';
+      document.getElementById('hero-desc').textContent = 'Soy Diego Medrano, un desarrollador full-stack junior apasionado por crear aplicaciones web y de escritorio limpias, modernas y responsivas. Diseño interfaces intuitivas y desarrollo sistemas backend eficientes para construir proyectos dinámicos y funcionales. Con experiencia en varios lenguajes y tecnologías, entrego soluciones completas y escalables — desde diseños front-end atractivos hasta bases de datos sólidas. Disfruto transformar ideas en aplicaciones reales que ofrezcan experiencias de usuario fluidas y agradables en todas las plataformas.';
+      document.getElementById('contact-link').textContent = 'Contáctame';
+
+      document.getElementById('exp-title').textContent = 'Experiencia';
+      document.getElementById('exp1-title').textContent = 'Estudiante de Programación (FACET)';
+      document.getElementById('exp1-date').textContent = '2025 – Actualidad';
+      document.getElementById('exp1-desc').textContent = 'Desarrollo de proyectos personales y académicos, enfocados en buenas prácticas de software y resolución de problemas.';
+      document.getElementById('exp2-title').textContent = 'Formación Autodidacta';
+      document.getElementById('exp2-date').textContent = '2020 – 2024';
+      document.getElementById('exp2-desc').textContent = 'Exploración profunda de sistemas operativos y ciberseguridad. Aprendizaje de gestión de entornos Linux, scripting en Bash y redes.';
+
+      document.getElementById('projects-title').textContent = 'Proyectos';
+      document.getElementById('otros').textContent = 'Más Proyectos';
+
+      document.getElementById('proj2-title').textContent = 'Sistema de Ventas y Stock';
+      document.getElementById('proj2-desc').textContent = 'Aplicación web profesional en PHP para tienda de ropa. Optimiza ventas, caja y gestión de inventario con un backend escalable.';
+
+      document.getElementById('proj5-title').textContent = 'Traductor Web';
+      document.getElementById('proj5-desc').textContent = '🇪🇸 Español: Traductor web creado con HTML, CSS y JavaScript. Utiliza la API Fetch para obtener traducciones en tiempo real y mostrarlas en una interfaz moderna.';
+
+      document.getElementById('proj0-title').textContent = 'Chat en Tiempo Real';
+      document.getElementById('proj0-desc').textContent = 'App con Node.js y WebSockets. Soporta mensajería multiusuario vía Wi-Fi local.';
+
+      document.getElementById('proj1-title').textContent = 'Generador de Excusas';
+      document.getElementById('proj1-desc').textContent = 'Genera excusas aleatorias en C.';
+
+      document.getElementById('proj3-title').textContent = 'Generador de Contraseñas';
+      document.getElementById('proj3-desc').textContent = 'Script PHP para generar contraseñas criptográficamente fuertes.';
+
+      // Botones
+      document.querySelectorAll('.btn-watch').forEach(btn => btn.textContent = 'Ver Demo');
+      document.querySelectorAll('.btn-view').forEach(btn => btn.textContent = 'Ver');
     }
   });
 
@@ -345,3 +475,6 @@ section.projects .row.big-project-row .card:hover {
   }, appearOptions);
   faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
+
+</body>
+</html>
